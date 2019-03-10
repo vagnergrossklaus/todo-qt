@@ -23,11 +23,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    model/taskmodel.cpp
+    controller/taskcontroller.cpp \
+    controller/tasklocalcontroller.cpp \
+    controller/taskremotecontroller.cpp \
+    model/taskmodel.cpp \
+    repository/tasklocalrepository.cpp \
+    repository/taskremoterepository.cpp \
+    service/taskservice.cpp
 
 HEADERS += \
-        todo-lib_global.h \ 
-    model/taskmodel.h
+        todo-lib_global.h \
+    controller/taskcontroller.h \
+    controller/tasklocalcontroller.h \
+    controller/taskremotecontroller.h \
+    model/taskmodel.h \
+    repository/repository.h \
+    repository/tasklocalrepository.h \
+    repository/taskremoterepository.h \
+    service/taskservice.h \
+    todo-lib_global.h
 
 unix {
     target.path = /usr/lib

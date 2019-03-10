@@ -3,9 +3,11 @@
 
 #include <QDebug>
 #include <QInputDialog>
+#include <controller/tasklocalcontroller.h>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow) {
+    : QMainWindow(parent), ui(new Ui::MainWindow),
+      _taskcontroller(TaskLocalController()) {
 
   ui->setupUi(this);
 
@@ -22,7 +24,10 @@ void MainWindow::onAddClicked() {
   qDebug() << name;
 
   if (!name.isEmpty()) {
-    TaskWidget *widget = new TaskWidget(new TaskModel(name));
+    TaskModel *task = new TaskModel(name);
+    _taskcontroller.add(task);
+
+    TaskWidget *widget = new TaskWidget(task);
     connect(widget, &TaskWidget::removed, this, &MainWindow::onRemoved);
     ui->vblTasks->addWidget(widget);
   }

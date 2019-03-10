@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include <controller/taskcontroller.h>
+
 #include "taskwidget.h"
 
 namespace Ui {
@@ -18,6 +20,8 @@ public:
 
 private:
   Ui::MainWindow *ui;
+
+  TaskController _taskcontroller;
 
 private slots:
   void onAddClicked();
