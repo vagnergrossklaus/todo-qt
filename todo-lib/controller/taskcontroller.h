@@ -8,10 +8,13 @@ public:
   virtual QVector<TaskModel *> find();
   virtual void add(TaskModel *task);
   virtual void remove(const int &id);
-  virtual void update(TaskModel *task);
+  virtual void edit(TaskModel *task);
+  virtual void edit(QVector<TaskModel *> tasks) = 0;
 
 protected:
   TaskController(TaskService taskService);
+
+  TaskService taskService() const;
 
 private:
   TaskService _taskService;

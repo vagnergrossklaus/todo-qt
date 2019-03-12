@@ -1,11 +1,76 @@
 #include "tasklocalrepository.h"
 
-TaskLocalRepository::TaskLocalRepository() {}
+#include <QDebug>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QSqlRecord>
 
-QVector<TaskModel *> TaskLocalRepository::findAll() { return {}; }
+#include "manager/database/databasemanager.h"
 
-void TaskLocalRepository::add(TaskModel *task) { Q_UNUSED(task); }
+TaskLocalRepository::TaskLocalRepository() {
+  DatabaseManager::instance().database();
+}
 
-void TaskLocalRepository::remove(const int &id) { Q_UNUSED(id); }
+QVector<TaskModel *> TaskLocalRepository::findAll() {
 
-void TaskLocalRepository::update(TaskModel *task) { Q_UNUSED(task); }
+  QVector<TaskModel *> tasks = {};
+
+  QSqlQuery query(DatabaseManager::instance().database());
+  if (query.exec("SELECT id, name, status FROM task")) {
+    TaskModel *task = nullptr;
+    QSqlRecord record;
+    while (query.next()) {
+
+      record = query.record();
+
+      task = new TaskModel(record.value("name").toString());
+      task->setId(record.value("id").toInt());
+      task->setStatus(record.value("status").toInt());
+
+      tasks.append(task);
+    }
+  } else {
+    qDebug() << query.lastError().text();
+  }
+
+  return tasks;
+}
+
+void TaskLocalRepository::add(TaskModel *task) {
+  QSqlQuery query(DatabaseManager::instance().database());
+
+  query.prepare("INSERT INTO task (name, status) VALUES (:name, :status)");
+  query.bindValue(":name", task->name());
+  query.bindValue(":status", static_cast<int>(task->status()));
+
+  if (query.exec()) {
+    task->setId(query.lastInsertId().toInt());
+  } else {
+    qDebug() << query.lastError().text();
+  }
+}
+
+void TaskLocalRepository::remove(const int &id) {
+  QSqlQuery query(DatabaseManager::instance().database());
+
+  query.prepare("DELETE FROM task WHERE id = :id");
+  query.bindValue(":id", id);
+
+  if (!query.exec()) {
+    qDebug() << query.lastError().text();
+  }
+}
+
+void TaskLocalRepository::edit(TaskModel *task) {
+  QSqlQuery query(DatabaseManager::instance().database());
+
+  query.prepare(
+      "UPDATE task SET name = :name, status = :status WHERE id = :id");
+  query.bindValue(":name", task->name());
+  query.bindValue(":status", static_cast<int>(task->status()));
+  query.bindValue(":id", task->id());
+
+  if (!query.exec()) {
+    qDebug() << query.lastError().text();
+  }
+}

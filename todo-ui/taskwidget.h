@@ -16,10 +16,14 @@ public:
   explicit TaskWidget(TaskModel *task, QWidget *parent = nullptr);
   ~TaskWidget();
 
+  TaskModel *task() const;
+
 private:
   Ui::TaskWidget *ui;
 
   TaskModel *_task;
+
+  void strikeOut(Qt::CheckState state);
 
 private slots:
   void onStateChanged(int state);
@@ -27,6 +31,7 @@ private slots:
   void onRemoveClicked();
 
 signals:
+  void edited(TaskWidget *widget);
   void removed(TaskWidget *widget);
 };
 

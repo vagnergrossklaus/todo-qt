@@ -11,7 +11,7 @@ public:
   QVector<TaskModel *> findAll() override;
   void add(TaskModel *task) override;
   void remove(const int &id) override;
-  void update(TaskModel *task) override;
+  void edit(TaskModel *task) override;
 };
 
 #endif // TASKREMOTEREPOSITORY_H

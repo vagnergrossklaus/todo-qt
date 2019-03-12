@@ -10,6 +10,8 @@ QString TaskModel::name() const { return _name; }
 
 void TaskModel::setName(const QString &name) { _name = name; }
 
-TaskState TaskModel::state() const { return _state; }
+TaskStatus TaskModel::status() const { return _status; }
 
-void TaskModel::setState(const TaskState &state) { _state = state; }
+void TaskModel::setStatus(const TaskStatus &status) { _status = status; }
+
+void TaskModel::setStatus(int status) { setStatus(TaskStatus(status)); }

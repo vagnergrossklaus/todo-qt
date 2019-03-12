@@ -5,7 +5,7 @@
 
 #include <QString>
 
-enum class TaskState : int {
+enum class TaskStatus : int {
   DONE = Qt::CheckState::Checked,
   TODO = Qt::CheckState::Unchecked
 };
@@ -20,13 +20,14 @@ public:
   QString name() const;
   void setName(const QString &name);
 
-  TaskState state() const;
-  void setState(const TaskState &state);
+  TaskStatus status() const;
+  void setStatus(const TaskStatus &status);
+  void setStatus(int status);
 
 private:
   int _id = 0;
   QString _name = "";
-  TaskState _state = TaskState::TODO;
+  TaskStatus _status = TaskStatus::TODO;
 };
 
 #endif // TASKMODEL_H

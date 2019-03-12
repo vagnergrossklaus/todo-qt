@@ -11,7 +11,8 @@ public:
   QVector<TaskModel *> findAll();
   void add(TaskModel *task);
   void remove(const int &id);
-  void update(TaskModel *task);
+  void edit(TaskModel *task);
+  void edit(QVector<TaskModel *> tasks);
 
 private:
   Repository<TaskModel> *_taskRepository = nullptr;

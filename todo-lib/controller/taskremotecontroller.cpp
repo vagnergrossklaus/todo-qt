@@ -4,3 +4,5 @@
 
 TaskRemoteController::TaskRemoteController()
     : TaskController(TaskService(new TaskRemoteRepository())) {}
+
+void TaskRemoteController::edit(QVector<TaskModel *> tasks) { Q_UNUSED(tasks); }

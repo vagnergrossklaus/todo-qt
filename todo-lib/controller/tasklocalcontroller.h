@@ -6,6 +6,8 @@
 class TODOLIBSHARED_EXPORT TaskLocalController : public TaskController {
 public:
   TaskLocalController();
+
+  void edit(QVector<TaskModel *> tasks);
 };
 
 #endif // TASKLOCALCONTROLLER_H

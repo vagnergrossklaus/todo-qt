@@ -4,7 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       -= gui
+QT -= gui
+
+QT += sql
 
 TARGET = todo
 TEMPLATE = lib
@@ -29,7 +31,10 @@ SOURCES += \
     model/taskmodel.cpp \
     repository/tasklocalrepository.cpp \
     repository/taskremoterepository.cpp \
-    service/taskservice.cpp
+    service/taskservice.cpp \
+    manager/database/databasemanager.cpp \
+    service/configservice.cpp \
+    model/configmodel.cpp
 
 HEADERS += \
         todo-lib_global.h \
@@ -41,7 +46,14 @@ HEADERS += \
     repository/tasklocalrepository.h \
     repository/taskremoterepository.h \
     service/taskservice.h \
-    todo-lib_global.h
+    todo-lib_global.h \
+    manager/database/databasemanager.h \
+    service/configservice.h \
+    model/configmodel.h
+
+
+sql.files = $$files( resources/sql/*.sql, true )
+sql.prefix = /
 
 unix {
     target.path = /usr/lib
@@ -60,3 +72,5 @@ OBJECTS_DIR = $$DESTDIR/.obj
 MOC_DIR = $$DESTDIR/.moc
 RCC_DIR = $$DESTDIR/.qrc
 UI_DIR = $$DESTDIR/.u
+
+RESOURCES +=

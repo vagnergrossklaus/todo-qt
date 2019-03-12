@@ -12,7 +12,7 @@ public:
   virtual QVector<T *> findAll() = 0;
   virtual void add(T *t) = 0;
   virtual void remove(const int &id) = 0;
-  virtual void update(T *t) = 0;
+  virtual void edit(T *t) = 0;
 };
 
 #endif // REPOSITORY_H

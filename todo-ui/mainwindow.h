@@ -21,10 +21,14 @@ public:
 private:
   Ui::MainWindow *ui;
 
-  TaskController _taskcontroller;
+  TaskController *_taskcontroller;
+
+  void addTask(TaskModel *task);
 
 private slots:
   void onAddClicked();
+  void onDoneUndoneStateChanged(int state);
+  void onEdited(TaskWidget *widget);
   void onRemoved(TaskWidget *widget);
 };
 
