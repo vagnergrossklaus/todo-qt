@@ -6,7 +6,7 @@
 
 QT -= gui
 
-QT += sql
+QT += sql network
 
 TARGET = todo
 TEMPLATE = lib
@@ -33,8 +33,10 @@ SOURCES += \
     repository/taskremoterepository.cpp \
     service/taskservice.cpp \
     manager/database/databasemanager.cpp \
-    service/configservice.cpp \
-    model/configmodel.cpp
+    model/configmodel.cpp \
+    manager/network/networkmanager.cpp \
+    manager/configuration/configurationmanager.cpp \
+    factory/taskcontrollerfactory.cpp
 
 HEADERS += \
         todo-lib_global.h \
@@ -48,8 +50,10 @@ HEADERS += \
     service/taskservice.h \
     todo-lib_global.h \
     manager/database/databasemanager.h \
-    service/configservice.h \
-    model/configmodel.h
+    model/configmodel.h \
+    manager/network/networkmanager.h \
+    manager/configuration/configurationmanager.h \
+    factory/taskcontrollerfactory.h
 
 
 sql.files = $$files( resources/sql/*.sql, true )
@@ -72,5 +76,3 @@ OBJECTS_DIR = $$DESTDIR/.obj
 MOC_DIR = $$DESTDIR/.moc
 RCC_DIR = $$DESTDIR/.qrc
 UI_DIR = $$DESTDIR/.u
-
-RESOURCES +=

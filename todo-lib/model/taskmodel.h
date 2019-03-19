@@ -3,6 +3,7 @@
 
 #include "todo-lib_global.h"
 
+#include <QObject>
 #include <QString>
 
 enum class TaskStatus : int {
@@ -10,7 +11,8 @@ enum class TaskStatus : int {
   TODO = Qt::CheckState::Unchecked
 };
 
-class TODOLIBSHARED_EXPORT TaskModel {
+class TODOLIBSHARED_EXPORT TaskModel : public QObject {
+  Q_OBJECT
 public:
   TaskModel(const QString &name);
 

@@ -23,7 +23,7 @@ void DatabaseManager::init() {
   qDebug() << query.lastError().text();
 }
 
-DatabaseManager DatabaseManager::instance() {
+DatabaseManager &DatabaseManager::instance() {
   static DatabaseManager manager;
   return manager;
 }

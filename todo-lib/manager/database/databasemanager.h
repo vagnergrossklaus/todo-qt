@@ -5,7 +5,7 @@
 
 class DatabaseManager {
 public:
-  static DatabaseManager instance();
+  static DatabaseManager &instance();
 
   QSqlDatabase database();
 

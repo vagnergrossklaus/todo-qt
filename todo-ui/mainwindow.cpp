@@ -4,10 +4,14 @@
 #include <QDebug>
 #include <QInputDialog>
 #include <controller/tasklocalcontroller.h>
+#include <controller/taskremotecontroller.h>
+#include <factory/taskcontrollerfactory.h>
+#include <manager/configuration/configurationmanager.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow),
-      _taskcontroller(new TaskLocalController()) {
+      _taskcontroller(TaskControllerFactory::create(
+          ConfigurationManager::instance().configuration().repository())) {
 
   ui->setupUi(this);
 
